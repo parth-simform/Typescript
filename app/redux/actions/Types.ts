@@ -1,2 +1,0 @@
-export const FETCH_TODO_DATA = 'FETCH_TODO_DATA';
-export const SAVE_TODO_DATA = 'SAVE_TODO_DATA';

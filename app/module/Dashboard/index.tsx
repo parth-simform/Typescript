@@ -2,24 +2,17 @@ import React from 'react';
 import {View, FlatList, ActivityIndicator} from 'react-native';
 import {useSelector} from 'react-redux';
 import TabelIndex from '../../components/TableIndex.tsx';
-import {saveTodos} from '../../redux/actions/Actions';
+import {saveTodos} from '../../redux/reduxSause';
 import {color} from '../../utils/color';
 import {Style} from './style';
-
-type reducreType = {
+interface saveData {
   todosData: saveTodos;
   loading: boolean;
-};
-
-interface saveData {
-  Todos: reducreType;
 }
 
 const DashBoard = () => {
-  const todosData: any = useSelector(
-    (state: saveData) => state.Todos.todosData,
-  );
-  const loader = useSelector((state: saveData) => state.Todos.loading);
+  const todosData: any = useSelector((state: saveData) => state.todosData);
+  const loader = useSelector((state: saveData) => state.loading);
 
   const renderItem = ({item}: any) => (
     <TabelIndex
