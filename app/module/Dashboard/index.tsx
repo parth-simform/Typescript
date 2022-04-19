@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, FlatList, ActivityIndicator} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import TabelIndex from '../../components/TableIndex.tsx';
-import {saveTodos} from '../../redux/reduxSause';
+import {Creators, saveTodos} from '../../redux/reduxSause';
 import {color} from '../../utils/color';
 import {Style} from './style';
 interface saveData {
@@ -11,6 +11,7 @@ interface saveData {
 }
 
 const DashBoard = () => {
+  const disptch = useDispatch();
   const todosData: any = useSelector((state: saveData) => state.todosData);
   const loader = useSelector((state: saveData) => state.loading);
 
@@ -19,7 +20,7 @@ const DashBoard = () => {
       completed={item.completed}
       onPress={() => console.log(item.id)}
       title={item.title}
-      onPressDelete={() => console.log(item.id)}
+      onPressDelete={() => disptch(Creators.deleteTodo(item.id))}
     />
   );
 
@@ -28,7 +29,12 @@ const DashBoard = () => {
       {loader ? (
         <ActivityIndicator size="large" color={color.black} />
       ) : (
-        <FlatList data={todosData} renderItem={renderItem} />
+        <FlatList
+          data={todosData}
+          renderItem={renderItem}
+          refreshing={false}
+          onRefresh={() => disptch(Creators.fetchTodoData())}
+        />
       )}
     </View>
   );

@@ -3,21 +3,24 @@ import {createReducer, createActions} from 'reduxsauce';
 export const {Types, Creators} = createActions({
   fetchTodoData: ['loading'],
   saveTodoData: ['response', 'loading'],
+  deleteTodo: ['response', 'loading'],
 });
 export interface saveTodos {
   userId: number;
-  id: number;
+  id: string;
   title: string;
   completed: string;
 }
 export interface intialValue {
   loading: boolean;
   todosData: any;
+  delete: string;
 }
 
 const INITIAL_STATE: intialValue = {
   todosData: [],
   loading: false,
+  delete: '',
 };
 export interface Action {
   action: string;
@@ -36,8 +39,15 @@ export const saveTodoData = (state: intialValue, action: Action) => {
     loading: false,
   };
 };
+export const deleteTodo = (state: intialValue) => {
+  return {
+    ...state,
+    loading: true,
+  };
+};
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.FETCH_TODO_DATA]: fetchTodoData,
   [Types.SAVE_TODO_DATA]: saveTodoData,
+  [Types.DELETE_TODO]: deleteTodo,
 });
