@@ -1,17 +1,11 @@
 import {Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {useDispatch} from 'react-redux';
 import {string} from '../../utils/string';
-import {Creators} from '../../redux/reduxSause';
 import {styles} from './style';
+import useFetch from '../../hooks/useFetch';
 
 const Login = (props: any) => {
-  const dispetch = useDispatch();
-
-  const goToDashboard = () => {
-    dispetch(Creators.fetchTodoData());
-    props.navigation.push('Dashboard');
-  };
+  const {goToDashboard} = useFetch(props);
 
   return (
     <View style={styles.container}>

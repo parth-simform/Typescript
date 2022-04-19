@@ -2,6 +2,8 @@ import React from 'react';
 import {View, FlatList, ActivityIndicator} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import TabelIndex from '../../components/TableIndex.tsx';
+import useFetch from '../../hooks/useFetch';
+import useOrientation from '../../hooks/userOrientation';
 import {Creators, saveTodos} from '../../redux/reduxSause';
 import {color} from '../../utils/color';
 import {Style} from './style';
@@ -10,13 +12,15 @@ interface saveData {
   loading: boolean;
 }
 
-const DashBoard = () => {
+const DashBoard = (props: any) => {
   const disptch = useDispatch();
-  const todosData: any = useSelector((state: saveData) => state.todosData);
+  const {isPortrait} = useOrientation();
+  const {todosData} = useFetch(props);
   const loader = useSelector((state: saveData) => state.loading);
 
   const renderItem = ({item}: any) => (
     <TabelIndex
+      isPotrait={isPortrait}
       completed={item.completed}
       onPress={() => console.log(item.id)}
       title={item.title}

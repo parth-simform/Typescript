@@ -10,13 +10,11 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingVertical: 5,
     paddingLeft: 10,
-    width: 380,
   },
   txtContainer: {flex: 0.7},
   deleteContainer: {
     flex: 0.3,
     alignItems: 'flex-end',
-    marginRight: 15,
   },
   txt: {color: color.red},
 });

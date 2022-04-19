@@ -4,7 +4,7 @@ import getapi from '../services/Api';
 interface saveData {
   data: saveTodos;
 }
-interface deleteData {
+interface propsType {
   response: string;
   type: string;
 }
@@ -17,7 +17,7 @@ function* fetchTodoData() {
   } catch (error) {}
 }
 
-function* deleteTodo(props: deleteData) {
+function* deleteTodo(props: propsType) {
   try {
     let num = props.response;
     let arr: Array<saveTodos> | [] = yield select(state => state.todosData);

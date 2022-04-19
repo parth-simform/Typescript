@@ -8,16 +8,19 @@ type tableIndex = {
   completed: string;
   onPress: () => void;
   onPressDelete: () => void;
+  isPotrait: boolean | string;
 };
 
 const TabelIndex = (props: tableIndex) => {
+  const isPotrait = props.isPotrait;
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {width: isPotrait ? 380 : 700}]}>
       <TouchableOpacity style={styles.txtContainer} onPress={props.onPress}>
         <Text>{props.title}</Text>
         <Text>{props.completed}</Text>
       </TouchableOpacity>
-      <View style={styles.deleteContainer}>
+      <View
+        style={[styles.deleteContainer, {marginRight: isPotrait ? 15 : 30}]}>
         <TouchableOpacity onPress={props.onPressDelete}>
           <Text style={styles.txt}>{string.delete}</Text>
         </TouchableOpacity>
