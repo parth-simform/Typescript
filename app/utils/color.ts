@@ -1,5 +1,5 @@
 export const color = {
   white: 'white',
-  loader: 'black',
+  black: 'black',
   red: 'red',
 };

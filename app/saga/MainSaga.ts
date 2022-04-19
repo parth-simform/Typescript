@@ -1,20 +1,15 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {getUrl} from '../utils/constant';
-import {Creators, Types} from '../redux/reduxSause';
+import {Creators, saveTodos, Types} from '../redux/reduxSause';
+import getapi from '../services/Api';
 
 interface saveData {
-  userId: number;
-  id: number;
-  title: string;
-  completed: string;
-  json: any;
+  data: saveTodos;
 }
 
 function* fetchTodoData() {
   try {
-    const url = getUrl;
-    const response: saveData = yield call(fetch, url);
-    const data: saveData = yield response.json();
+    const response: saveData = yield call(getapi, '/todos');
+    const data: saveData = yield response.data;
     yield put(Creators.saveTodoData(data));
   } catch (error) {}
 }

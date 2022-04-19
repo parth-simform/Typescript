@@ -19,13 +19,14 @@ const DashBoard = () => {
       completed={item.completed}
       onPress={() => console.log(item.id)}
       title={item.title}
+      onPressDelete={() => console.log(item.id)}
     />
   );
 
   return (
     <View style={Style.container}>
       {loader ? (
-        <ActivityIndicator size="large" color={color.loader} />
+        <ActivityIndicator size="large" color={color.black} />
       ) : (
         <FlatList data={todosData} renderItem={renderItem} />
       )}

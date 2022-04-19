@@ -1,1 +1,1 @@
-export const getUrl = 'https://jsonplaceholder.typicode.com/todos';
+export const getUrl = 'https://jsonplaceholder.typicode.com';

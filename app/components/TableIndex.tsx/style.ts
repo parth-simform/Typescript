@@ -1,12 +1,22 @@
 import {StyleSheet} from 'react-native';
+import {color} from '../../utils/color';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    borderBottomColor: 'black',
+    borderBottomColor: color.black,
+    alignItems: 'center',
     borderBottomWidth: 1,
-    paddingVertical: 10,
+    paddingVertical: 5,
     paddingLeft: 10,
+    width: 380,
   },
+  txtContainer: {flex: 0.7},
+  deleteContainer: {
+    flex: 0.3,
+    alignItems: 'flex-end',
+    marginRight: 15,
+  },
+  txt: {color: color.red},
 });
