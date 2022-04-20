@@ -1,5 +1,10 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {useColorScheme} from 'react-native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DashBoard from '../module/Dashboard';
 import Login from '../module/Login';
@@ -7,8 +12,10 @@ import Login from '../module/Login';
 const Stack = createNativeStackNavigator();
 
 export default function Router() {
+  const scheme = useColorScheme();
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Dashboard" component={DashBoard} />

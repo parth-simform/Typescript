@@ -26,10 +26,16 @@ function* deleteTodo(props: propsType) {
     yield put(Creators.saveTodoData(data));
   } catch (error) {}
 }
-
+function* darkMode() {
+  try {
+    let mode: boolean = yield select(state => state);
+    yield put(Creators.darkMode(mode));
+  } catch (error) {}
+}
 function* MainSaga() {
   yield takeLatest(Types.FETCH_TODO_DATA, fetchTodoData);
   yield takeLatest(Types.DELETE_TODO, deleteTodo);
+  yield takeLatest(Types.DARK_MODE, darkMode);
 }
 
 export default MainSaga;

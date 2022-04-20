@@ -19,6 +19,8 @@ target 'TypescriptDemo' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'react-native-appearance', :path => '../node_modules/react-native-appearance'
+
   target 'TypescriptDemoTests' do
     inherit! :complete
     # Pods for testing

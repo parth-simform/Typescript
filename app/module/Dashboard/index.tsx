@@ -5,7 +5,6 @@ import TabelIndex from '../../components/TableIndex.tsx';
 import useFetch from '../../hooks/useFetch';
 import useOrientation from '../../hooks/userOrientation';
 import {Creators, saveTodos} from '../../redux/reduxSause';
-import {color} from '../../utils/color';
 import {Style} from './style';
 interface saveData {
   todosData: saveTodos;
@@ -15,7 +14,7 @@ interface saveData {
 const DashBoard = (props: any) => {
   const disptch = useDispatch();
   const {isPortrait} = useOrientation();
-  const {todosData} = useFetch(props);
+  const {todosData, colors} = useFetch(props);
   const loader = useSelector((state: saveData) => state.loading);
 
   const renderItem = ({item}: any) => (
@@ -31,7 +30,7 @@ const DashBoard = (props: any) => {
   return (
     <View style={Style.container}>
       {loader ? (
-        <ActivityIndicator size="large" color={color.black} />
+        <ActivityIndicator size="large" color={colors.primary} />
       ) : (
         <FlatList
           data={todosData}
