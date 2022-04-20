@@ -1,13 +1,10 @@
 import * as React from 'react';
 import {useColorScheme} from 'react-native';
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DashBoard from '../module/Dashboard';
 import Login from '../module/Login';
+import {DarkTheme, DefaultTheme} from '../utils/colorTheme';
 
 const Stack = createNativeStackNavigator();
 
