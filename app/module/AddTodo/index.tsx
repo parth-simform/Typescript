@@ -1,5 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable radix */
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, {useEffect} from 'react';
 import {
   SafeAreaView,
@@ -13,24 +13,36 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {useMutation, useQuery} from '@apollo/client';
-import Search from './Search';
-import Todo from './Todo';
-import GET_TODOS from '../graphQl/queries';
+import {useMutation} from '@apollo/client';
+import Todo from '../../component/Todo';
 // import EditData from './EditData';
-import NEW_TODO from '../graphQl/mutation';
+import NEW_TODO from '../../graphQl/mutation';
 
-const Home = () => {
+// type GetTodo = {
+//   __typename: string;
+//   completed: boolean;
+//   title: string;
+//   userId: number;
+// };
+
+const AddTodo = () => {
   const [todo, setTodo] = React.useState<any>([]);
   const [title, onChangeTitle] = React.useState('');
   const [userId, onChangeUserId] = React.useState('');
   const [completed, onChangeCompleted] = React.useState('');
-  const {data, loading} = useQuery(GET_TODOS);
-
-  const [CreateATodo, {data: addData}] = useMutation(NEW_TODO);
+  // useLazyQuery is use when getData() function is called not when app is load
+  useEffect(() => {
+    // getData({
+    //   variables: {id: 18},
+    // });
+  }, []);
+  const [CreateATodo, {data: addData, loading}] = useMutation(NEW_TODO);
   useEffect(() => {
     if (addData) {
       setTodo([addData.addTodo, ...todo]);
+      onChangeTitle('');
+      onChangeUserId('');
+      onChangeCompleted('');
     }
   }, [addData]);
 
@@ -122,4 +134,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default AddTodo;

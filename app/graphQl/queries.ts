@@ -1,9 +1,8 @@
 import gql from 'graphql-tag';
 
-const GET_TODOS = gql`
-  query getTodos {
-    getTodos {
-      id
+export const GET_TODO = gql`
+  query getData($id: ID) {
+    getTodo(id: $id) {
       userId
       title
       completed
@@ -11,4 +10,13 @@ const GET_TODOS = gql`
   }
 `;
 
-export default GET_TODOS;
+export const GET_TODOS = gql`
+  query getDatas {
+    getTodos {
+      userId
+      title
+      completed
+    }
+  }
+`;
+// export default {GET_TODOS, GET_TODO};
