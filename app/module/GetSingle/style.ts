@@ -22,4 +22,8 @@ export const styles = StyleSheet.create({
     padding: 10,
     width: 300,
   },
+  secondContainer: {
+    marginTop: 20,
+    marginHorizontal: 10,
+  },
 });

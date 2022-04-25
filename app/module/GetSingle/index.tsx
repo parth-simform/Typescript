@@ -3,7 +3,6 @@
 import React from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   View,
   StatusBar,
   Text,
@@ -11,7 +10,6 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useLazyQuery} from '@apollo/client';
 import {GET_TODO} from '../../graphQl/queries';
 import {styles} from './style';
@@ -56,11 +54,7 @@ const GetSingle = () => {
             <Text>Submit</Text>
           </TouchableOpacity>
 
-          <View
-            style={{
-              marginTop: 20,
-              marginHorizontal: 10,
-            }}>
+          <View style={styles.secondContainer}>
             {loading ? (
               <ActivityIndicator color="red" />
             ) : (

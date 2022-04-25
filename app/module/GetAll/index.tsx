@@ -3,18 +3,15 @@
 import React from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   View,
   StatusBar,
-  Text,
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useQuery} from '@apollo/client';
-
-import Todo from '../../component/Todo';
+import Todo from '../../component/Todo/Todo';
 import {GET_TODOS} from '../../graphQl/queries';
+import {styles} from './style';
 // import EditData from './EditData';
 
 type GetTodo = {
@@ -28,10 +25,7 @@ type GetAllData = {
 };
 
 const GetAll = () => {
-  const [todo, setTodo] = React.useState<any>([]);
-
   const {data, loading} = useQuery<GetAllData>(GET_TODOS);
-  console.log(data, 'data');
 
   return (
     <>
@@ -54,28 +48,5 @@ const GetAll = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {flex: 1},
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  body: {
-    backgroundColor: Colors.white,
-    display: 'flex',
-    flexDirection: 'column',
-    alignContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
-  bodyContainer: {borderWidth: 1, margin: 5},
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    width: 300,
-  },
-});
 
 export default GetAll;

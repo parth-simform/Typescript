@@ -19,4 +19,3 @@ export const GET_TODOS = gql`
     }
   }
 `;
-// export default {GET_TODOS, GET_TODO};

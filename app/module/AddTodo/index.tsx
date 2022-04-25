@@ -1,9 +1,9 @@
+/* eslint-disable radix */
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, {useEffect} from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   View,
   StatusBar,
   Text,
@@ -12,31 +12,17 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useMutation} from '@apollo/client';
-import Todo from '../../component/Todo';
-// import EditData from './EditData';
+import Todo from '../../component/Todo/Todo';
 import NEW_TODO from '../../graphQl/mutation';
-
-// type GetTodo = {
-//   __typename: string;
-//   completed: boolean;
-//   title: string;
-//   userId: number;
-// };
-
+import {styles} from './style';
 const AddTodo = () => {
   const [todo, setTodo] = React.useState<any>([]);
-  const [title, onChangeTitle] = React.useState('');
-  const [userId, onChangeUserId] = React.useState('');
-  const [completed, onChangeCompleted] = React.useState('');
-  // useLazyQuery is use when getData() function is called not when app is load
-  useEffect(() => {
-    // getData({
-    //   variables: {id: 18},
-    // });
-  }, []);
+  const [title, onChangeTitle] = React.useState<string>('');
+  const [userId, onChangeUserId] = React.useState<string>('');
+  const [completed, onChangeCompleted] = React.useState<string>('');
   const [CreateATodo, {data: addData, loading}] = useMutation(NEW_TODO);
+
   useEffect(() => {
     if (addData) {
       setTodo([addData.addTodo, ...todo]);
@@ -86,7 +72,7 @@ const AddTodo = () => {
           <TouchableOpacity onPress={submitData}>
             <Text>Submit</Text>
           </TouchableOpacity>
-          <View style={{marginVertical: 10}}>
+          <View style={styles.todoList}>
             {todo.title && (
               <Text>
                 The title is {todo.title} and completed status{' '}
@@ -110,28 +96,5 @@ const AddTodo = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {flex: 1},
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  body: {
-    backgroundColor: Colors.white,
-    display: 'flex',
-    flexDirection: 'column',
-    alignContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
-  bodyContainer: {borderWidth: 1, margin: 5},
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    width: 300,
-  },
-});
 
 export default AddTodo;
