@@ -1,7 +1,7 @@
 /* eslint-disable radix */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -16,19 +16,31 @@ import {useMutation} from '@apollo/client';
 import Todo from '../../component/Todo/Todo';
 import NEW_TODO from '../../graphQl/mutation';
 import {styles} from './style';
+import DropDownPicker from 'react-native-dropdown-picker';
+interface DropdownValue {
+  label: string;
+  value: string;
+}
+
 const AddTodo = () => {
   const [todo, setTodo] = React.useState<any>([]);
   const [title, onChangeTitle] = React.useState<string>('');
   const [userId, onChangeUserId] = React.useState<string>('');
-  const [completed, onChangeCompleted] = React.useState<string>('');
   const [CreateATodo, {data: addData, loading}] = useMutation(NEW_TODO);
+  const [open, setOpen] = useState<boolean>(false);
+  const [value, setValue] = useState<string>('');
+  const [items, setItems] = useState<DropdownValue[]>([
+    {label: 'true', value: 'true'},
+    {label: 'false', value: 'false'},
+  ]);
+  console.log(value);
 
   useEffect(() => {
     if (addData) {
       setTodo([addData.addTodo, ...todo]);
       onChangeTitle('');
       onChangeUserId('');
-      onChangeCompleted('');
+      setValue('');
     }
   }, [addData]);
 
@@ -38,8 +50,7 @@ const AddTodo = () => {
         TodoData: {
           userId: parseInt(userId),
           title: title,
-          completed:
-            completed === 'true' || completed === 'True' ? true : false,
+          completed: value === 'true' || value === 'True' ? true : false,
         },
       },
     });
@@ -63,13 +74,19 @@ const AddTodo = () => {
             onChangeText={onChangeUserId}
             value={userId}
           />
-          <TextInput
-            style={styles.input}
-            placeholder={'add Complete'}
-            onChangeText={onChangeCompleted}
-            value={completed}
+
+          <DropDownPicker
+            open={open}
+            value={value}
+            placeholder={'Select Completed Status'}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            style={{width: 300, alignSelf: 'center'}}
+            containerStyle={{width: 300, alignSelf: 'center'}}
           />
-          <TouchableOpacity onPress={submitData}>
+          <TouchableOpacity style={{marginTop: 20}} onPress={submitData}>
             <Text>Submit</Text>
           </TouchableOpacity>
           <View style={styles.todoList}>

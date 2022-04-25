@@ -55,24 +55,23 @@ const GetSingle = () => {
           <View style={styles.secondContainer}>
             {loading ? (
               <ActivityIndicator color="red" />
+            ) : data && data.getTodo.userId ? (
+              <View>
+                <Text>
+                  {' \n'}
+                  userId : {data.getTodo.userId}
+                </Text>
+                <Text>
+                  {' \n'}
+                  Title : {data.getTodo.title}
+                </Text>
+                <Text>
+                  {' \n'}
+                  completed status :{data.getTodo.completed.toString()}
+                </Text>
+              </View>
             ) : (
-              data &&
-              data.getTodo && (
-                <View>
-                  <Text>
-                    {' \n'}
-                    userId : {data.getTodo.userId}
-                  </Text>
-                  <Text>
-                    {' \n'}
-                    Title : {data.getTodo.title}
-                  </Text>
-                  <Text>
-                    {' \n'}
-                    completed status :{data.getTodo.completed.toString()}
-                  </Text>
-                </View>
-              )
+              <Text>No data Found</Text>
             )}
           </View>
         </View>

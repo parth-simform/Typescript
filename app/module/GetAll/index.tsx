@@ -17,9 +17,10 @@ type GetTodo = {
   title: string;
   userId: number;
 };
-type GetAllData = {
+
+interface GetAllData {
   getTodos: GetTodo;
-};
+}
 
 const getTodos = (data: GetAllData) => {
   if (data.getTodos instanceof Array) {
@@ -40,7 +41,7 @@ const GetAll = () => {
             {loading ? (
               <ActivityIndicator color="red" />
             ) : (
-              data && data.getTodos && getTodos(data)
+              data && getTodos(data)
             )}
           </ScrollView>
         </View>
