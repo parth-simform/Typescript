@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -12,7 +10,6 @@ import {useQuery} from '@apollo/client';
 import Todo from '../../component/Todo/Todo';
 import {GET_TODOS} from '../../graphQl/queries';
 import {styles} from './style';
-// import EditData from './EditData';
 
 type GetTodo = {
   __typename: string;
@@ -21,9 +18,16 @@ type GetTodo = {
   userId: number;
 };
 type GetAllData = {
-  allData: GetTodo[];
+  getTodos: GetTodo;
 };
 
+const getTodos = (data: GetAllData) => {
+  if (data.getTodos instanceof Array) {
+    return data.getTodos.map((res: any) => {
+      return <Todo key={res.id} todo={res} />;
+    });
+  }
+};
 const GetAll = () => {
   const {data, loading} = useQuery<GetAllData>(GET_TODOS);
 
@@ -36,11 +40,7 @@ const GetAll = () => {
             {loading ? (
               <ActivityIndicator color="red" />
             ) : (
-              data &&
-              data.getTodos.length > 0 &&
-              data.getTodos.map((res: any) => {
-                return <Todo key={res.id} todo={res} />;
-              })
+              data && data.getTodos && getTodos(data)
             )}
           </ScrollView>
         </View>

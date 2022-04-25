@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -20,7 +18,7 @@ interface GetTodo {
   userId: number;
 }
 type getSingle = {
-  getTodo: GetTodo[];
+  getTodo: GetTodo;
 };
 
 const GetSingle = () => {
