@@ -5,6 +5,7 @@ import {styles} from './style';
 type Todo = {
   title: string;
   completed: boolean;
+  userId: string;
 };
 interface Props {
   key?: string;
@@ -15,7 +16,7 @@ const Todo = (props: Props) => {
 
   return (
     <>
-      <SafeAreaView key={props.key} style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.body}>
           <Text style={styles.sectionTitle}>{todo.title}</Text>
           <Text style={styles.sectionDescription}>

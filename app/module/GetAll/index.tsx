@@ -3,8 +3,9 @@ import {
   SafeAreaView,
   View,
   StatusBar,
-  ScrollView,
   ActivityIndicator,
+  FlatList,
+  ListRenderItemInfo,
 } from 'react-native';
 import {useQuery} from '@apollo/client';
 import Todo from '../../component/Todo/Todo';
@@ -15,35 +16,32 @@ type GetTodo = {
   __typename: string;
   completed: boolean;
   title: string;
-  userId: number;
+  userId: string;
 };
 
 interface GetAllData {
   getTodos: GetTodo;
 }
 
-const getTodos = (data: GetAllData) => {
-  if (data.getTodos instanceof Array) {
-    return data.getTodos.map((res: any) => {
-      return <Todo key={res.id} todo={res} />;
-    });
-  }
-};
 const GetAll = () => {
-  const {data, loading} = useQuery<GetAllData>(GET_TODOS);
+  const {data, loading} = useQuery<GetAllData | any>(GET_TODOS);
 
+  const renderItem = ({item}: ListRenderItemInfo<GetTodo>) => (
+    <Todo todo={item} />
+  );
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
         <View style={styles.body}>
-          <ScrollView>
-            {loading ? (
-              <ActivityIndicator color="red" />
-            ) : (
-              data && getTodos(data)
-            )}
-          </ScrollView>
+          {loading ? (
+            <ActivityIndicator color="red" />
+          ) : (
+            data &&
+            data.getTodos && (
+              <FlatList data={data.getTodos} renderItem={renderItem} />
+            )
+          )}
         </View>
       </SafeAreaView>
     </>

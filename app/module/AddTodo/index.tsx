@@ -7,10 +7,11 @@ import {
   View,
   StatusBar,
   Text,
-  ScrollView,
   ActivityIndicator,
   TextInput,
   TouchableOpacity,
+  ListRenderItemInfo,
+  FlatList,
 } from 'react-native';
 import {useMutation} from '@apollo/client';
 import Todo from '../../component/Todo/Todo';
@@ -21,6 +22,13 @@ interface DropdownValue {
   label: string;
   value: string;
 }
+
+type GetTodo = {
+  __typename: string;
+  completed: boolean;
+  title: string;
+  userId: string;
+};
 
 const AddTodo = () => {
   const [todo, setTodo] = React.useState<any>([]);
@@ -54,7 +62,9 @@ const AddTodo = () => {
       },
     });
   };
-
+  const renderItem = ({item}: ListRenderItemInfo<GetTodo>) => (
+    <Todo todo={item} />
+  );
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -96,17 +106,11 @@ const AddTodo = () => {
               </Text>
             )}
           </View>
-          <ScrollView>
-            {loading ? (
-              <ActivityIndicator color="red" />
-            ) : (
-              todo &&
-              todo.length > 0 &&
-              todo.map((res: any) => {
-                return <Todo todo={res} />;
-              })
-            )}
-          </ScrollView>
+          {loading ? (
+            <ActivityIndicator color="red" />
+          ) : (
+            todo && <FlatList data={todo} renderItem={renderItem} />
+          )}
         </View>
       </SafeAreaView>
     </>
