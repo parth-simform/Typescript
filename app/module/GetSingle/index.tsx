@@ -24,9 +24,7 @@ type getSingle = {
 const GetSingle = () => {
   const [userId, onChangeUserId] = React.useState('');
   // useLazyQuery is use when getData() function is called not when app is load
-  const [getData, {data, loading}] = useLazyQuery<getSingle>(GET_TODO, {
-    fetchPolicy: 'cache-and-network',
-  });
+  const [getData, {data, loading}] = useLazyQuery<getSingle>(GET_TODO);
 
   const submitData = () => {
     console.log(userId);
