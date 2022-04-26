@@ -4,6 +4,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginVertical: 10,
   },
   body: {
     backgroundColor: Colors.white,
