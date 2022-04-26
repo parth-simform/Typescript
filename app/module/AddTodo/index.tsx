@@ -33,7 +33,6 @@ const AddTodo = () => {
     {label: 'true', value: 'true'},
     {label: 'false', value: 'false'},
   ]);
-  console.log(value);
 
   useEffect(() => {
     if (addData) {
