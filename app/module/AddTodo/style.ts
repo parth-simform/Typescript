@@ -2,7 +2,9 @@ import {StyleSheet} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 export const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: {
+    flex: 1,
+  },
   scrollView: {
     backgroundColor: Colors.lighter,
   },
@@ -22,5 +24,18 @@ export const styles = StyleSheet.create({
     padding: 10,
     width: 300,
   },
-  todoList: {marginVertical: 10},
+  todoList: {
+    marginVertical: 10,
+  },
+  dropdownContainer: {
+    width: 300,
+    alignSelf: 'center',
+  },
+  containerStyle: {
+    width: 300,
+    alignSelf: 'center',
+  },
+  btn: {
+    marginTop: 20,
+  },
 });

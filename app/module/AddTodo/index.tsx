@@ -83,10 +83,10 @@ const AddTodo = () => {
             setOpen={setOpen}
             setValue={setValue}
             setItems={setItems}
-            style={{width: 300, alignSelf: 'center'}}
-            containerStyle={{width: 300, alignSelf: 'center'}}
+            style={styles.dropdownContainer}
+            containerStyle={styles.containerStyle}
           />
-          <TouchableOpacity style={{marginTop: 20}} onPress={submitData}>
+          <TouchableOpacity style={styles.btn} onPress={submitData}>
             <Text>Submit</Text>
           </TouchableOpacity>
           <View style={styles.todoList}>

@@ -1,12 +1,21 @@
 import React from 'react';
 import {SafeAreaView, View, Text} from 'react-native';
 import {styles} from './style';
-const Todo = (props: any) => {
+
+type Todo = {
+  title: string;
+  completed: boolean;
+};
+interface Props {
+  key?: string;
+  todo: Todo;
+}
+const Todo = (props: Props) => {
   const {todo} = props;
 
   return (
     <>
-      <SafeAreaView key={todo.id} style={styles.container}>
+      <SafeAreaView key={props.key} style={styles.container}>
         <View style={styles.body}>
           <Text style={styles.sectionTitle}>{todo.title}</Text>
           <Text style={styles.sectionDescription}>
