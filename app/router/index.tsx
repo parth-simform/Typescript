@@ -11,7 +11,11 @@ export default function Router() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Dashboard" component={DashBoard} />
+        <Stack.Screen
+          name="Dashboard"
+          component={DashBoard}
+          options={{presentation: 'modal'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
