@@ -9,6 +9,15 @@ const ChildA = (props: childA) => {
     return name;
   };
 
+  const a = [0, 1, 2, 3, 4, 5, 6, 4, 5, 8, 5, 2] as const;
+
+  const b = [0, 1, 2, 3, 4, 5, 6, 4, 5, 8, 5, 2] as const;
+
+  a.map((_, i: keyof typeof b) => {
+    const c = b[i];
+    console.log(c);
+  });
+
   return (
     <SafeAreaView style={{justifyContent: 'center', alignItems: 'center'}}>
       <Text>{props?.variant}</Text>
