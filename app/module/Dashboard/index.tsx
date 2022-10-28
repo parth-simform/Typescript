@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, FlatList, ActivityIndicator} from 'react-native';
 import {useSelector} from 'react-redux';
+import Card from '../../components/Card';
 import TabelIndex from '../../components/TableIndex.tsx';
 import {saveTodos} from '../../redux/actions/Actions';
 import {color} from '../../utils/color';
@@ -21,20 +22,22 @@ const DashBoard = () => {
   );
   const loader = useSelector((state: saveData) => state.Todos.loading);
 
-  const renderItem = ({item}: any) => (
-    <TabelIndex
-      completed={item.completed}
-      onPress={() => console.log(item.id)}
-      title={item.title}
-    />
+  const isCardOPen = useSelector(
+    (state: any) => state.Todos.isOpenCard ?? true,
   );
+
+  const renderItem = ({item}: any) => <Card index={0} />;
 
   return (
     <View style={Style.container}>
       {loader ? (
         <ActivityIndicator size="large" color={color.loader} />
       ) : (
-        <FlatList data={todosData} renderItem={renderItem} />
+        <FlatList
+          scrollEnabled={isCardOPen}
+          data={todosData}
+          renderItem={renderItem}
+        />
       )}
     </View>
   );

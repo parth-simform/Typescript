@@ -1,4 +1,8 @@
-import {SAVE_TODO_DATA, FETCH_TODO_DATA} from '../actions/Types';
+import {
+  SAVE_TODO_DATA,
+  FETCH_TODO_DATA,
+  OPEN_EMOJI_CARD,
+} from '../actions/Types';
 
 export interface intialValue {
   loading: boolean;
@@ -27,6 +31,12 @@ function MainReducer(state: intialValue = INITIAL_STATE, action: Action) {
         ...state,
         loading: false,
         todosData: action.response,
+      };
+    case OPEN_EMOJI_CARD:
+      return {
+        ...state,
+        loading: false,
+        isOpenCard: action.response,
       };
 
     default:

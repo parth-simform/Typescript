@@ -1,13 +1,17 @@
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {LogBox, SafeAreaView, StyleSheet} from 'react-native';
+import {ReactionProvider} from 'react-native-reactions';
 import React from 'react';
 import {Provider} from 'react-redux';
 import {store} from './app/redux/store';
 import Router from './app/router';
 const App = () => {
+  LogBox.ignoreAllLogs();
   return (
     <SafeAreaView style={style.container}>
       <Provider store={store}>
-        <Router />
+        <ReactionProvider>
+          <Router />
+        </ReactionProvider>
       </Provider>
     </SafeAreaView>
   );
